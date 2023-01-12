@@ -1,7 +1,7 @@
-package entities.implementations;
+package backend.entities.implementations;
 
-import entities.Cart;
-import entities.Product;
+import backend.entities.Cart;
+import backend.entities.Product;
 
 import java.util.ArrayList;
 import java.util.List;

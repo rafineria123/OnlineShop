@@ -1,6 +1,6 @@
-package entities.implementations;
+package backend.entities.implementations;
 
-import entities.Product;
+import backend.entities.Product;
 
 public class ProductImpl implements Product {
     private int id;
