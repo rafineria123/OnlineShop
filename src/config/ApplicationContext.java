@@ -1,7 +1,6 @@
 package config;
 
 import entities.Cart;
-import entities.Menu;
 import entities.User;
 
 public class ApplicationContext {

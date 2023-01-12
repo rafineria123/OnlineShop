@@ -1,12 +1,14 @@
 package entities;
 
+import java.util.List;
+
 public interface Cart {
 
     boolean isEmpty();
 
-    void addProduct(Product productById);
+    void addProduct(Product product);
 
-    Product[] getProducts();
+    List<Product> getProducts();
 
     void clear();
 
