@@ -1,6 +1,6 @@
-package services;
+package backend.services;
 
-import entities.Product;
+import backend.entities.Product;
 
 public interface ProductManagementService {
 

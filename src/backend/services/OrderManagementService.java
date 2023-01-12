@@ -1,6 +1,6 @@
-package services;
+package backend.services;
 
-import entities.Order;
+import backend.entities.Order;
 
 public interface OrderManagementService {
 

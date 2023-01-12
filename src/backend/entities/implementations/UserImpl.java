@@ -1,6 +1,6 @@
-package entities.implementations;
+package backend.entities.implementations;
 
-import entities.User;
+import backend.entities.User;
 
 public class UserImpl implements User {
     private int id;

@@ -1,6 +1,6 @@
-package services;
+package backend.services;
 
-import entities.User;
+import backend.entities.User;
 
 public interface UserManagementService {
 

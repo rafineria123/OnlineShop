@@ -1,7 +1,8 @@
-package config;
+package backend.config;
 
-import entities.Cart;
-import entities.User;
+import backend.entities.Cart;
+import backend.entities.User;
+import backend.menu.Menu;
 
 public class ApplicationContext {
 
