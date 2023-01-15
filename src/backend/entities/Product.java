@@ -4,7 +4,7 @@ public interface Product {
 
     int getId();
 
-    String getName();
+    String getProductName();
 
 }
 

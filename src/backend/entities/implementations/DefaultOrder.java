@@ -1,4 +1,4 @@
 package backend.entities.implementations;
 
-public class OrderImpl {
+public class DefaultOrder {
 }

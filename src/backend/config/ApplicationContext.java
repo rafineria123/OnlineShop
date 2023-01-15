@@ -2,6 +2,7 @@ package backend.config;
 
 import backend.entities.Cart;
 import backend.entities.User;
+import backend.entities.implementations.DefaultCart;
 import backend.menu.Menu;
 
 public class ApplicationContext {
@@ -43,7 +44,7 @@ public class ApplicationContext {
 
     public Cart getSessionCart() {
         if (this.sessionCart == null) {
-//todo:            this.sessionCart = new DefaultCart();
+            this.sessionCart = new DefaultCart();
         }
         return this.sessionCart;
     }

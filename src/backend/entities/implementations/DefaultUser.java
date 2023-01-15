@@ -2,7 +2,7 @@ package backend.entities.implementations;
 
 import backend.entities.User;
 
-public class UserImpl implements User {
+public class DefaultUser implements User {
     private int id;
     private String firstName;
     private String lastName;
