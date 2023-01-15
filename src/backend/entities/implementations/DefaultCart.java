@@ -6,11 +6,11 @@ import backend.entities.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartImpl implements Cart {
+public class DefaultCart implements Cart {
 
     private List<Product> products;
 
-    public CartImpl() {
+    public DefaultCart() {
         this.products = new ArrayList<>(10);
     }
 
