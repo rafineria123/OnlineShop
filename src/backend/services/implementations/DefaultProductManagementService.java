@@ -4,6 +4,9 @@ import backend.entities.Product;
 import backend.entities.implementations.DefaultProduct;
 import backend.services.ProductManagementService;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public class DefaultProductManagementService implements ProductManagementService {
     private static DefaultProductManagementService instance;
 
@@ -11,6 +14,23 @@ public class DefaultProductManagementService implements ProductManagementService
 
     static {
         initProducts();
+    }
+
+    private DefaultProductManagementService() {
+
+    }
+
+
+
+    @Override
+    public Product[] getProducts() {
+        return products;
+    }
+
+    @Override
+    public Product getProductById(int productIdToAddToCart) {
+        Optional<Product> product = Arrays.stream(products).filter(p -> p.getId()==productIdToAddToCart).findFirst();
+        return product.isPresent() ? product.get():null;
     }
 
     private static void initProducts() {
@@ -27,26 +47,10 @@ public class DefaultProductManagementService implements ProductManagementService
                 new DefaultProduct(10, "Wienerberger Engineering Brick Red Smooth Class B 73mm - Pack of 368", "Bricks", 523.99)
         };
     }
-
-    private DefaultProductManagementService() {
-
-    }
-
     public static ProductManagementService getInstance() {
         if (instance == null) {
             instance = new DefaultProductManagementService();
         }
         return instance;
-    }
-
-    @Override
-    public Product[] getProducts() {
-        return products;
-    }
-
-    @Override
-    public Product getProductById(int productIdToAddToCart) {
-        // <write your code here>
-        return null;
     }
 }

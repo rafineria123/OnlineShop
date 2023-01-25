@@ -3,6 +3,9 @@ package backend.services.implementations;
 import backend.entities.User;
 import backend.services.UserManagementService;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class DefaultUserManagementService implements UserManagementService {
 
     private static final String NOT_UNIQUE_EMAIL_ERROR_MESSAGE = "This email is already used by another user. Please, use another email";
@@ -13,15 +16,23 @@ public class DefaultUserManagementService implements UserManagementService {
 
     private static DefaultUserManagementService instance;
 
-    // <write your code here>
+    private User[] users;
 
-    private DefaultUserManagementService() {
+    private int lastIndex;
+
+    {
+        initUserManagementService();
     }
 
     @Override
     public String registerUser(User user) {
-        // <write your code here>
-        return null;
+        if(user == null || user.getEmail().isEmpty()) return EMPTY_EMAIL_ERROR_MESSAGE;
+        if(Arrays.stream(users).filter(u -> u.getEmail().equalsIgnoreCase(user.getEmail())).findFirst().isPresent()) return NOT_UNIQUE_EMAIL_ERROR_MESSAGE;
+        if (users.length <= lastIndex) {
+            users = Arrays.copyOf(users, users.length << 1);
+        }
+        users[lastIndex++] = user;
+        return NO_ERROR_MESSAGE;
     }
 
     public static UserManagementService getInstance() {
@@ -34,17 +45,21 @@ public class DefaultUserManagementService implements UserManagementService {
 
     @Override
     public User[] getUsers() {
-        // <write your code here>
-        return null;
+        return Arrays.stream(users).filter(Objects::nonNull).toArray(User[]::new);
     }
 
     @Override
     public User getUserByEmail(String userEmail) {
-        // <write your code here>
-        return null;
+        var user = Arrays.stream(users).filter(u -> u.getEmail() == userEmail).findFirst();
+        return user.isPresent()?user.get():null;
     }
 
     void clearServiceState() {
-        // <write your code here>
+        initUserManagementService();
+    }
+
+    void initUserManagementService(){
+        users = new User[DEFAULT_USERS_CAPACITY];
+        lastIndex = 0;
     }
 }
