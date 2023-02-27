@@ -14,20 +14,18 @@ public class DefaultOrder implements Order {
 
     @Override
     public boolean isCreditCardNumberValid(String creditCardNumber) {
-        try {
-            Integer.parseInt(creditCardNumber);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return creditCardNumber.length() == AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER ? true:false;
+        return creditCardNumber.toCharArray().length == AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER &&
+                !creditCardNumber.contains(" ") && Long.parseLong(creditCardNumber) > 0;
     }
 
     @Override
     public void setCreditCardNumber(String creditCardNumber) {
         if(isCreditCardNumberValid(creditCardNumber)){
             this.creditCardNumber = creditCardNumber;
+        }else{
+            throw new IllegalArgumentException();
         }
-        throw new IllegalArgumentException();
+
     }
 
     @Override
