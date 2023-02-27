@@ -3,6 +3,8 @@ package backend.menu.implementations;
 import backend.config.ApplicationContext;
 import backend.menu.Menu;
 
+import java.util.Scanner;
+
 public class ChangePasswordMenu implements Menu {
 
     private ApplicationContext context;
@@ -13,12 +15,17 @@ public class ChangePasswordMenu implements Menu {
 
     @Override
     public void start() {
-        // <write your code here>
+        printMenuHeader();
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        context.getLoggedInUser().setPassword(input);
+        System.out.println("Your password has been successfully changed");
+        context.getMainMenu().start();
     }
 
     @Override
     public void printMenuHeader() {
-        // <write your code here>
+        System.out.println("please enter your new password: ");
     }
 
 }
