@@ -5,6 +5,9 @@ import backend.menu.Menu;
 import backend.services.UserManagementService;
 import backend.services.implementations.DefaultUserManagementService;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class CustomerListMenu implements Menu {
 
     private ApplicationContext context;
@@ -17,12 +20,14 @@ public class CustomerListMenu implements Menu {
 
     @Override
     public void start() {
-        // <write your code here>
+        printMenuHeader();
+        context.getMainMenu().start();
     }
 
     @Override
     public void printMenuHeader() {
-        // <write your code here>
+        System.out.println("*** CUSTOMER LIST ***");
+        Arrays.stream(userManagementService.getUsers()).filter(Objects::nonNull).forEach(System.out::println);
     }
 
 }
