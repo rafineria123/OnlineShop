@@ -41,7 +41,7 @@ public class DefaultOrderManagementService implements OrderManagementService {
 
     @Override
     public Order[] getOrdersByUserId(int userId) {
-        Order[] result = Arrays.stream(orders).filter(order -> order.getCustomerId() == userId).toArray(Order[]::new);
+        Order[] result = Arrays.stream(orders).filter(Objects::nonNull).filter(order -> order.getCustomerId() == userId).toArray(Order[]::new);
         return result.length > 0 ? result : null;
     }
 

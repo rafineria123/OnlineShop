@@ -70,6 +70,7 @@ public class MainMenu implements Menu {
 
     @Override
     public void printMenuHeader() {
+        System.out.println("*** MENU NAVIGATION ***");
         if (Objects.isNull(context.getLoggedInUser())) System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER);
         else System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_IN_USER);
     }
