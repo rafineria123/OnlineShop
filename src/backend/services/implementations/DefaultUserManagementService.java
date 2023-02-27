@@ -27,7 +27,7 @@ public class DefaultUserManagementService implements UserManagementService {
     @Override
     public String registerUser(User user) {
         if(user == null || user.getEmail().isEmpty()) return EMPTY_EMAIL_ERROR_MESSAGE;
-        if(Arrays.stream(users).filter(u -> u.getEmail().equalsIgnoreCase(user.getEmail())).findFirst().isPresent()) return NOT_UNIQUE_EMAIL_ERROR_MESSAGE;
+        if(Arrays.stream(users).filter(Objects::nonNull).filter(u -> u.getEmail().equalsIgnoreCase(user.getEmail())).findFirst().isPresent()) return NOT_UNIQUE_EMAIL_ERROR_MESSAGE;
         if (users.length <= lastIndex) {
             users = Arrays.copyOf(users, users.length << 1);
         }
@@ -50,9 +50,18 @@ public class DefaultUserManagementService implements UserManagementService {
 
     @Override
     public User getUserByEmail(String userEmail) {
-        var user = Arrays.stream(users).filter(u -> u.getEmail() == userEmail).findFirst();
-        return user.isPresent()?user.get():null;
+        var user = Arrays.stream(users).filter(Objects::nonNull).filter(u -> u.getEmail().equals(userEmail)).findFirst();
+        return user.orElse(null);
     }
+
+    public User getUserByCredentials(String email, String password){
+        User user = getUserByEmail(email);
+        if(user!=null && user.getPassword().equals(password)){
+            return user;
+        }
+        return null;
+    }
+
 
     void clearServiceState() {
         initUserManagementService();

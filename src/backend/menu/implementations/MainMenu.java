@@ -31,10 +31,12 @@ public class MainMenu implements Menu {
 
     @Override
     public void start() {
-        clearConsole();
+        if (context.getMainMenu() == null) {
+            context.setMainMenu(this);
+        }
         printMenuHeader();
         Scanner scanner = new Scanner(System.in);
-        int userInput = getUserIntInput(scanner, 6);
+        int userInput = getUserNavigationInput(scanner, 6);
         Menu menuToNavigate;
         switch (userInput) {
             case 1:
@@ -70,6 +72,31 @@ public class MainMenu implements Menu {
     public void printMenuHeader() {
         if (Objects.isNull(context.getLoggedInUser())) System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_OUT_USER);
         else System.out.println(MAIN_MENU_TEXT_FOR_LOGGED_IN_USER);
+    }
+
+    private int getUserNavigationInput(Scanner scanner, int maximumOptionNumber) {
+
+        while (true) {
+            try {
+                String input = scanner.nextLine();
+                if(input.contains("exit")) System.exit(0);
+                int result = Integer.parseInt(input);
+                if (result < 1 || result > maximumOptionNumber) {
+                    showInputErrorMessage();
+                } else {
+                    return result;
+                }
+            } catch (NumberFormatException e) {
+                showInputErrorMessage();
+            }
+
+        }
+    }
+    private void showInputErrorMessage(){
+        String invalidNumberError = "Please input valid menu number." + System.lineSeparator();
+        clearConsole();
+        printMenuHeader();
+        System.out.println(invalidNumberError);
     }
 
 }

@@ -35,4 +35,13 @@ public class DefaultProduct implements Product {
     public Double getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return
+                "id=" + id +
+                ", productName='" + productName + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", price=" + price;
+    }
 }

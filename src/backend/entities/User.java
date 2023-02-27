@@ -2,6 +2,7 @@ package backend.entities;
 
 public interface User {
 
+
     String getFirstName();
     String getLastName();
     String getPassword();
