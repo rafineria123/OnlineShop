@@ -45,8 +45,9 @@ public class CheckoutMenu implements Menu {
                 orderManagementService.addOrder(order);
                 System.out.println("Thanks a lot for your purchase. Details about order delivery are sent to your email.");
                 context.getSessionCart().clear();
-                context.getMainMenu().start();
+                break;
             }
+            context.getMainMenu().start();
 
         }
     }
