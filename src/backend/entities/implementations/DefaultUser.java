@@ -3,6 +3,13 @@ package backend.entities.implementations;
 import backend.entities.User;
 
 public class DefaultUser implements User {
+
+    private static int userCounter = 1;
+
+    {
+        id = ++userCounter;
+    }
+
     private int id;
     private String firstName;
     private String lastName;
@@ -43,4 +50,17 @@ public class DefaultUser implements User {
     public void setEmail(String newEmail) {
         this.email = newEmail;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
 }

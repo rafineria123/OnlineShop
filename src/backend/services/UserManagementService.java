@@ -10,4 +10,6 @@ public interface UserManagementService {
 
     User getUserByEmail(String userEmail);
 
+    User getUserByCredentials(String email, String password);
+
 }
