@@ -2,7 +2,10 @@ package backend.entities.implementations;
 
 import backend.entities.Product;
 
-public class DefaultProduct implements Product {
+import java.io.Serializable;
+
+public class DefaultProduct implements Product, Serializable {
+    private static final long serialVersionUID = 42L;
     private int id;
     private String productName;
     private String categoryName;
