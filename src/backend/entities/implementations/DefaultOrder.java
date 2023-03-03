@@ -3,10 +3,12 @@ package backend.entities.implementations;
 import backend.entities.Order;
 import backend.entities.Product;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class DefaultOrder implements Order {
+public class DefaultOrder implements Order, Serializable {
     private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
+    private static final long serialVersionUID = 42L;
 
     private String creditCardNumber;
     private Product[] products;

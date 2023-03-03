@@ -2,6 +2,7 @@ package backend.services.implementations;
 
 import backend.entities.Order;
 import backend.services.OrderManagementService;
+import backend.services.OrderStoringService;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -11,6 +12,7 @@ public class DefaultOrderManagementService implements OrderManagementService {
     private static final int DEFAULT_ORDERS_CAPACITY = 10;
 
     private static DefaultOrderManagementService instance;
+    private OrderStoringService orderStoringService;
 
     private Order[] orders;
 
@@ -47,17 +49,30 @@ public class DefaultOrderManagementService implements OrderManagementService {
 
     @Override
     public Order[] getOrders() {
-        return Arrays.stream(orders).filter(Objects::nonNull).toArray(Order[]::new);
+        if (orders == null || orders.length == 0) {
+            orders = orderStoringService.loadOrders().toArray(Order[]::new);
+        }
+        return this.orders;
     }
 
     void clearServiceState() {
         initOrderManagementService();
     }
 
-    private  void initOrderManagementService(){
-        this.orders = new Order[DEFAULT_ORDERS_CAPACITY];
+    private void initOrderManagementService(){
+        this.orderStoringService = DefaultOrderStoringService.getInstance();
         this.lastIndex = 0;
+        orders = new Order[DEFAULT_ORDERS_CAPACITY];
+        orderStoringService.loadOrders().forEach(order -> addOrder(order));
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                orderStoringService.saveOrders(Arrays.stream(getOrders()).toList());
+            }
+        }, "Shutdown-thread"));
+
     }
+
+
 
 
 }

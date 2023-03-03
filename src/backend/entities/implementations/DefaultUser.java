@@ -2,8 +2,10 @@ package backend.entities.implementations;
 
 import backend.entities.User;
 
-public class DefaultUser implements User {
+import java.io.Serializable;
 
+public class DefaultUser implements User, Serializable {
+    private static final long serialVersionUID = 42L;
     private static int userCounter = 1;
 
     {
